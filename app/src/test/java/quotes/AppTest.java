@@ -16,36 +16,30 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-    class AppTest {
-        @Test public void testRandomNum(){
-
-            Gson gson = new Gson();
-
-            FileReader fr= null;
-            try {
-                fr = new FileReader("./src/test/resources/recentquotesTest.json");
-                BufferedReader br=new BufferedReader(fr);
-
-                ArrayList<HashMap> json = gson.fromJson(br, ArrayList.class);
-
-                br.close();
-                fr.close();
-
-                int Random = (int)(Math.random()*json.size());
-                for(int i=1 ; i<10000;i++) {
-                    assertTrue(Random >= 0 && Random < json.size());
-                }
-                System.out.println("random value is between the 0 and ArrayList size");
+class AppTest {
+    @Test
+    public void getQuoteFromFilTest() {
+        String testAuthor = "Louis Armstrong";
+        String testText = "“What we play is life.“";
+        Object testObject = new Quotes(null, testAuthor, "0", testText);
+        System.out.println(testObject);
+        String filePath = "./src/test/resources/recentquotesTest.json";
+        ArrayList<Quotes> output = App.getQuotesFromFile(filePath);
+        assertNotNull(output);
+        assertEquals(output.get(6).getAuthor(), testAuthor);
 
 
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            BufferedReader br=new BufferedReader(fr);
-        }
 
     }
+    @Test
+    public void getQuoteFromApiTest(){
+        String testUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en";
+        System.out.println("out"+App.sendGetRequest(testUrl));
+        assertNotNull(App.sendGetRequest(testUrl));
+
+    }
+
+
+}
 

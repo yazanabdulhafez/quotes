@@ -58,11 +58,6 @@ public class Quotes {
 
     @Override
     public String toString() {
-        return "Quotes{" +
-                "tags=" + tags +
-                ", author='" + author + '\'' +
-                ", likes='" + likes + '\'' +
-                ", text='" + text + '\'' +
-                '}';
+        return "{author: "+ getAuthor()+" , text: "+ getText()+ "}";
     }
 }
