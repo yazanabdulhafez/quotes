@@ -110,7 +110,6 @@ private  static int jsonSize; //variable for the size of arraylist that contain 
         String line = in.readLine();
         createdLine = new StringBuilder(line);
         while(line != null){
-           System.out.println("quote from API: "+line);
             line = in.readLine();
             createdLine.append(line);
         }
